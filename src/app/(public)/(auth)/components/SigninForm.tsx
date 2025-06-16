@@ -2,16 +2,15 @@
 import { useForm } from "react-hook-form";
 import { FormInput } from "./FormInput";
 import { UserSigninDto } from "@/types/user/auth/auth.dto";
-import { UserSignin } from "@/api/auth/auth";
+import { UserSignin } from "@/app/api/auth/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 
 
 export const SigninForm = () => {
   const router = useRouter();
-
-
   const [error, setError] = useState(null)
   const {
     register,
@@ -21,22 +20,34 @@ export const SigninForm = () => {
     formState: { errors },
   } = useForm<UserSigninDto>();
 
-  const onSubmit = (data: UserSigninDto) => {
-    setError(null);
-    UserSignin(data)
-    .then((ret) => {
-      if(ret?.error){
-        throw new Error(ret.message)
-      }
-      console.log(ret)
-      reset();
-    })
-    .catch((error: any) => {
-      setError(error);
-    })
-    .finally(() => {
-      router.push("/feed");
-    })
+  const onSubmit = async (data: UserSigninDto) => {
+    // setError(null);
+    // UserSignin(data)
+    // .then((ret) => {
+    //   if(ret?.error){
+    //     throw new Error(ret.message)
+    //   }
+    //   router.push("/feed");
+    //   reset();
+    // })
+    // .catch((error: any) => {
+    //   setError(error);
+    // })
+    // .finally(() => {
+      
+    // })
+     const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (res?.error) {
+      // setError(true);
+    } else {
+      reset(); // limpa os campos
+      window.location.href = "/feed"; // redireciona
+    }
   };
 
   return (

@@ -7,14 +7,14 @@ export async function UserSignin(data: UserSigninDto){
     try {
         const response = await fetch(`${api}/auth/signin`,{
             method: "POST",
+            credentials: 'include',
             headers: {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
         })
 
-         const result = await response.json();
-
+        const result = await response.json();
         if (!response.ok) {
             const errorBody = await response.json();
             throw new Error(errorBody.message || response.statusText);

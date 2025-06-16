@@ -6,7 +6,7 @@ const PUBLIC_ROUTES = [
   '/signin',
   '/signup',
   '/about',
-  '/api/public', // se você tiver APIs públicas
+  '/api/public',
 ];
 
 // Prefixos que requerem autenticação
