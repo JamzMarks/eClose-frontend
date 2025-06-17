@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react"
 
 export const NavBtn = () => {
       const { data: session } = useSession();
-
     return (
         <div className="flex items-center">
           {session?.user ? (

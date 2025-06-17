@@ -18,7 +18,7 @@ export default async function PrivateLayout({
   return (
     <>
       <Navbar></Navbar>
-      <main className='max-w-[1240px] mx-auto'>
+      <main className='max-w-[1240px] mx-auto px-4'>
         {children}
       </main>
     </>

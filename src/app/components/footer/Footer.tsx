@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Socials } from "./components/socials";
+import { ROUTES } from "@/constants/routes";
 
 export const Footer = () => {
   return (
@@ -8,7 +9,7 @@ export const Footer = () => {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <Link href="https://flowbite.com/" className="flex items-center">
+            <Link href={ROUTES.HOME} className="flex items-center">
               <Image
                 src={"logo/test.svg"}
                 alt="logo"
@@ -24,17 +25,17 @@ export const Footer = () => {
               </h2>
               <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
-                  <a href="https://flowbite.com/" className="hover:underline">
+                  <Link href="https://flowbite.com/" className="hover:underline">
                     Flowbite
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="https://tailwindcss.com/"
                     className="hover:underline"
                   >
                     Tailwind CSS
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -44,20 +45,20 @@ export const Footer = () => {
               </h2>
               <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
-                  <a
+                  <Link
                     href="https://github.com/themesberg/flowbite"
                     className="hover:underline "
                   >
                     Github
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="https://discord.gg/4eeurUVvTy"
                     className="hover:underline"
                   >
                     Discord
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -67,14 +68,14 @@ export const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <Link href="#" className="hover:underline">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <Link href="#" className="hover:underline">
                     Terms &amp; Conditions
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -84,9 +85,9 @@ export const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-xs text-gray-500 sm:text-center ">
             © 2024{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
+            <Link href={ROUTES.HOME} className="hover:underline">
               eClose™
-            </a>
+            </Link>
             . All Rights Reserved.
           </span>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
