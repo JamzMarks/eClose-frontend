@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import axios from 'axios'
 import { EventCard } from "./components/cards/EventCard";
 import ExploreFilters from "./components/Filters";
 import Pagination from "./components/Pagination";
-import DateRangePickerWithInlineButtons from "@/utils/Date/DateRangePicker";
 import { ExploreType } from "./components/ExploreType";
 
 type Event = {
@@ -68,6 +66,9 @@ export const ExplorePage = () => {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  const mockQtd = 70;
+  const mockItensPerPage= 18;
+
   useEffect(() => {
     if (!hasMore) return;
   }, [page]);
@@ -90,18 +91,25 @@ export const ExplorePage = () => {
   }, [hasMore, loading]);
 
   return (
-    <div className="min-h-screen px-6 py-4 bg-black text-white">
+    <div className="min-h-screen px-6 py-4">
       <ExploreType></ExploreType>
       <ExploreFilters></ExploreFilters>
     {/* <DateRangePickerWithInlineButtons/> */}
       {/* Events */}
       <div className="my-8 ">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {mockEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
+          {mockEvents.map((event) => {
+            const cards = [];
+            for(let i = 0; i < 5; i++){
+              cards.push(<EventCard key={(event.id + i)} event={event} />)
+            }    
+            return cards      
+          }
+            
+            
+          )}
         </div>
-          <Pagination></Pagination>
+        <Pagination qtd={mockQtd} itemPerPage={mockItensPerPage}></Pagination>
       </div>
 
       <div className="mt-6 flex justify-center">

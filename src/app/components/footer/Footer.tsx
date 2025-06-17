@@ -4,9 +4,12 @@ import { Socials } from "./components/socials";
 import { ROUTES } from "@/constants/routes";
 
 export const Footer = () => {
-  return (
-    <footer className="bg-white text-sm">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    return(
+        
+
+<footer className="bg-white">
+    <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+    <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link href={ROUTES.HOME} className="flex items-center">

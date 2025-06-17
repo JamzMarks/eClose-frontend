@@ -39,7 +39,7 @@ export const ExploreType = () => {
             className={`flex flex-col items-center justify-center px-4 py-2 rounded-lg border text-sm cursor-pointer transition-all w-full max-w-[100px] sm:max-w-[120px]
                 ${
                 selected === id
-                    ? 'bg-orange-600 text-white border-orange-600 shadow'
+                    ? 'bg-amber-600 text-white border-amber-600 shadow'
                     : 'bg-white text-neutral-700 border-neutral-300 hover:bg-neutral-100'
                 }`}
             >
