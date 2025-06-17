@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 interface SocialsProps{
     title: string;
     path: string;
@@ -6,9 +7,9 @@ interface SocialsProps{
 
 export const Socials = ({title, path}: SocialsProps) => {
     return(
-        <a href="#" className="text-gray-800 hover:text-gray-900 ms-5">
-            <Image src='logo\socials\github.svg' alt={title} width={30} height={30}></Image>
+        <Link href="#" className="text-gray-800 hover:text-gray-900 ms-5">
+            <Image src='logo\socials\github.svg' alt={title} width={25} height={25}></Image>
             <span className="sr-only">{title}</span>
-        </a>
+        </Link>
     )
 }
