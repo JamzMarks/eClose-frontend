@@ -21,33 +21,33 @@ export const SigninForm = () => {
   } = useForm<UserSigninDto>();
 
   const onSubmit = async (data: UserSigninDto) => {
-    // setError(null);
-    // UserSignin(data)
-    // .then((ret) => {
-    //   if(ret?.error){
-    //     throw new Error(ret.message)
-    //   }
-    //   router.push("/feed");
-    //   reset();
-    // })
-    // .catch((error: any) => {
-    //   setError(error);
-    // })
-    // .finally(() => {
+    setError(null);
+    UserSignin(data)
+    .then((ret) => {
+      if(ret?.error){
+        throw new Error(ret.message)
+      }
+      router.push("/feed");
+      reset();
+    })
+    .catch((error: any) => {
+      setError(error);
+    })
+    .finally(() => {
       
-    // })
-     const res = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-    });
+    })
+    //  const res = await signIn("credentials", {
+    //   redirect: false,
+    //   email: data.email,
+    //   password: data.password,
+    // });
 
-    if (res?.error) {
-      // setError(true);
-    } else {
-      reset(); // limpa os campos
-      window.location.href = "/feed"; // redireciona
-    }
+    // if (res?.error) {
+    //   // setError(true);
+    // } else {
+    //   reset(); // limpa os campos
+    //   window.location.href = "/feed"; // redireciona
+    // }
   };
 
   return (

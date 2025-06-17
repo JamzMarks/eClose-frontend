@@ -1,8 +1,11 @@
 import { Search, MapPin, Rss, Compass } from 'lucide-react'
 import Link from 'next/link'
 import { Searchbar } from './components/Searchbar'
-import AuthBtns from './components/AuthBtn'
+import AuthBtns from './components/UserBtn/AuthBtn'
 import Image from "next/image";
+import { useSession } from 'next-auth/react';
+import { NavBtn } from './components/UserBtn/NavBtn'
+
 
 export const Navbar = () => {
   return (
@@ -11,7 +14,7 @@ export const Navbar = () => {
         {/* Left - Logo */}
         <div className="flex items-center space-x-2">
           <Link href="/" className='flex'>
-            <Image src={'logo/test.svg'} alt='logo' width={30} height={30}></Image>
+            <Image src={'logo/test.svg'} alt='logo' width={80} height={80}></Image>
           </Link>
           <Searchbar></Searchbar>
         </div>
@@ -29,8 +32,7 @@ export const Navbar = () => {
           </Link>
         </div>
 
-        {/* Right - Auth Buttons */}
-        <AuthBtns />
+        <NavBtn></NavBtn>
       </div>
     </nav>
   )
