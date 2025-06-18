@@ -13,7 +13,7 @@ export const NavLinks = () => {
     { href: "/feed", label: "Feed", icon: <Rss size={16} /> },
   ];
   return (
-    <div className="flex items-center gap-4 text-sm h-full">
+    <div className="flex gap-4 text-sm min-h-full">
       {links.map((link) => {
         const isActive = pathname.startsWith(link.href);
         return(
@@ -30,24 +30,6 @@ export const NavLinks = () => {
         }
       )}
 
-      {/* <Link
-        href="/explore"
-        className="flex items-center gap-1 hover:text-[#e17100] transition h-full"
-      >
-        <Compass size={16} /> <span>Explore</span>
-      </Link>
-      <Link
-        href="/map"
-        className="flex items-center gap-1 hover:text-[#e17100] transition"
-      >
-        <MapPin size={16} /> <span>Map</span>
-      </Link>
-      <Link
-        href="/feed"
-        className="flex items-center gap-1 hover:text-[#e17100] transition"
-      >
-        <Rss size={16} /> <span>Feed</span>
-      </Link> */}
     </div>
   );
 };

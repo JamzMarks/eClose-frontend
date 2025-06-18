@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 type Event = {
@@ -18,7 +19,7 @@ type Event = {
 export const EventCard = ({ event }: { event: Event }) => {
   const formatDate = (date?: Date) =>
     date ? new Date(date).toLocaleDateString("pt-BR") : "Data indefinida";
-
+  
   return (
   //   <div className="bg-white rounded-2xl shadow-md p-4 w-full max-w-md hover:shadow-lg transition">
   //     <div className="flex items-center gap-4">
@@ -115,10 +116,11 @@ export const EventCard = ({ event }: { event: Event }) => {
     </button>
   </div>
   
+  
   <div className="px-4 pb-4 pt-0 mt-2">
-    <button className="cursor-pointer w-full rounded-md bg-amber-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+    <Link href={'event/asdasdasd'} className="cursor-pointer w-full rounded-md bg-amber-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
       View Details
-    </button>
+    </Link>
   </div>
 </div>  
   );

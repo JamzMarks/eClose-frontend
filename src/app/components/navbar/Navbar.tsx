@@ -13,7 +13,7 @@ export const Navbar = () => {
         {/* Left - Logo */}
         <div className="flex items-center space-x-2">
           <Link href="/" className='flex'>
-            <Image src={'logo/test.svg'} alt='logo' width={80} height={80}></Image>
+            <Image src={'logo/logo.svg'} alt='logo' width={80} height={80}></Image>
           </Link>
           <Searchbar></Searchbar>
         </div>
