@@ -8,8 +8,8 @@ import { NavLinks } from './components/NavLinks';
 export const Navbar = () => {
   
   return (
-    <nav className="w-full px-4 py-3 shadow-md">
-      <div className="max-w-[1240px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <nav className="w-full h-16 px-6 shadow-md">
+      <div className="max-w-[1240px] mx-auto h-full flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Left - Logo */}
         <div className="flex items-center space-x-2">
           <Link href="/" className='flex'>
