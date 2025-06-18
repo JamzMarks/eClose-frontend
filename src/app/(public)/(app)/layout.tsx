@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <>
     <Navbar></Navbar>
-    <main className='max-w-[1240px] mx-auto'>
+    <main className='min-h-screen max-w-[1240px] mx-auto'>
       {children}
     </main>
     <Footer></Footer>
