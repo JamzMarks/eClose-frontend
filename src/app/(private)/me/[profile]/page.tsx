@@ -2,6 +2,7 @@
 
 import { useSession, signOut } from "next-auth/react";
 import { ProfileHeader } from "./components/ProfileHeader";
+import ProfileStats from "./components/ProfileStats";
 
 export const UserPage = () => {
   const { data: session, status } = useSession();
@@ -30,6 +31,7 @@ export const UserPage = () => {
       >
         Sair
       </button>
+      {/* <ProfileTabs /> */}
     </div>
   );
 }
