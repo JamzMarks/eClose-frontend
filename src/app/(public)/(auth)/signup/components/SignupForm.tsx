@@ -3,11 +3,17 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import { FormInput } from "./FormInput";
 import { UserSignupDto } from "@/types/user/auth/auth.dto";
+import { FormInput } from "../../components/FormInput";
+import { UserSignUp } from "@/app/api/auth/auth";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 
 export const SignupForm = () => {
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [erro, setError] = useState<any | null>(null)
   const {
     register,
     handleSubmit,
@@ -17,7 +23,6 @@ export const SignupForm = () => {
     formState: { errors },
   } = useForm<UserSignupDto>();
   
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   
   const togglePassword = () => {
     setShowPassword(prev => !prev)
@@ -43,10 +48,25 @@ export const SignupForm = () => {
   },
 };
 
-  const onSubmit = (data: UserSignupDto) => {
-    console.log(data)
+  const onSubmit = async (data: UserSignupDto) => {
+  try {
+    const ret = await UserSignUp(data); // Assincrono
+    console.log('Cadastro realizado com sucesso:', ret);
+
+    await signIn('credentials', {
+      email: data.email,
+      password: data.password,
+      // callbackUrl: '/feed'
+    });
+    router.push("/feed");
+  } catch (error: any) {
+    console.error('Erro ao cadastrar:', error);
+    setError(error?.message || 'Erro desconhecido');
+  } finally {
     reset();
   }
+};
+
   
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>

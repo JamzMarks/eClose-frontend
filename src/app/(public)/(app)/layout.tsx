@@ -10,7 +10,8 @@ export default function RootLayout({
   return (
     <>
     <Navbar></Navbar>
-    <main className='min-h-screen max-w-[1240px] mx-auto'>
+    {/* <main className='min-h-screen max-w-[1240px] mx-auto'> */}
+    <main className='mt-16 grow'>
       {children}
     </main>
     <Footer></Footer>

@@ -1,27 +1,25 @@
-import Link from 'next/link'
-import { Searchbar } from './components/Searchbar'
+import Link from "next/link";
+import { Searchbar } from "./components/Searchbar";
 import Image from "next/image";
-import { NavBtn } from './components/UserBtn/NavBtn'
-import { NavLinks } from './components/NavLinks';
-
+import { NavLinks } from "./components/NavLinks";
+import ProfileModalButton from "./components/UserBtn/AuthBtn";
 
 export const Navbar = () => {
-  
   return (
-    <nav className="w-full h-16 px-6 shadow-md">
-      <div className="max-w-[1240px] mx-auto h-full flex flex-col sm:flex-row items-center justify-between gap-4">
-        {/* Left - Logo */}
+    <nav className="px-2 xl:px-4 bg-white h-15 border border-gray-100 ">
+      <div className="h-full flex flex-row items-center justify-between gap-4 max-w-full">
+        {/* Left - Logo + Search */}
         <div className="flex items-center space-x-2">
-          <Link href="/" className='flex'>
-            <Image src={'logo/logo.svg'} alt='logo' width={80} height={80}></Image>
+          <Link href="/" className="flex">
+            <Image src="/logo/logo.svg" alt="logo" width={80} height={80} />
           </Link>
-          <Searchbar></Searchbar>
+          <Searchbar />
         </div>
-        <NavLinks></NavLinks>
-        <NavBtn></NavBtn>
+        <NavLinks />
+        <ProfileModalButton />
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

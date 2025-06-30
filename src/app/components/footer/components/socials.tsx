@@ -1,15 +1,20 @@
-import Image from "next/image";
 import Link from "next/link";
-interface SocialsProps{
-    title: string;
-    path: string;
+import { LucideIcon } from "lucide-react";
+
+interface SocialsProps {
+  title: string;
+  href: string;
+  icon: LucideIcon;
 }
 
-export const Socials = ({title, path}: SocialsProps) => {
-    return(
-        <Link href="#" className="text-gray-800 hover:text-gray-900 ms-5">
-            <Image src='logo\socials\github.svg' alt={title} width={25} height={25}></Image>
-            <span className="sr-only">{title}</span>
-        </Link>
-    )
-}
+export const Socials = ({ title, href, icon: Icon }: SocialsProps) => {
+  return (
+    <Link
+      href={href}
+      className="text-gray-400 hover:text-white transition-colors mx-2"
+      aria-label={title}
+    >
+      <Icon size={24} />
+    </Link>
+  );
+};

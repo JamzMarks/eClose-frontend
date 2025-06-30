@@ -8,5 +8,6 @@ export const ROUTES = {
   FEED: '/feed',
   MAP: '/map',
   EXPLORE: '/explore',
+  HELP: '/help',
   PROFILE: (id: string) => `/profile/${id}`,
 };

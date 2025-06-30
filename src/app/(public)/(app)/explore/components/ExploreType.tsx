@@ -31,12 +31,12 @@ export const ExploreType = () => {
     }
 
     return (
-        <div className="flex justify-around gap-2 mt-4 sm:gap-4 sm:justify-center">
+        <div className="flex justify-around gap-2 sm:gap-4 sm:justify-center">
         {OPTIONS.map(({ id, label, icon: Icon }) => (
             <label
             key={id}
             htmlFor={id}
-            className={`flex flex-col items-center justify-center px-4 py-2 rounded-lg border text-sm cursor-pointer transition-all w-full max-w-[100px] sm:max-w-[120px]
+            className={`flex flex-col items-center justify-center px-4 py-2 rounded-full border text-sm cursor-pointer transition-all w-full max-w-[100px] sm:max-w-[120px]
                 ${
                 selected === id
                     ? 'bg-amber-600 text-white border-amber-600 shadow'

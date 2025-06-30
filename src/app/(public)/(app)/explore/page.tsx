@@ -5,6 +5,9 @@ import { EventCard } from "./components/cards/EventCard";
 import ExploreFilters from "./components/Filters";
 import Pagination from "./components/Pagination";
 import { ExploreType } from "./components/ExploreType";
+import { ExploreBannerCarousel } from "./components/banner/ExploreBanner";
+import ExploreFiltersForm from "./components/filters/ExploreFiltersForm";
+import { ExploreFiltersModal } from "./components/filters/ExploreFiltersModal";
 
 type Event = {
   id: string;
@@ -91,13 +94,20 @@ export const ExplorePage = () => {
   }, [hasMore, loading]);
 
   return (
-    <div className="min-h-screen px-6 py-4">
+    <div className=''>
+    <ExploreBannerCarousel></ExploreBannerCarousel>
+    <div className="px-6 py-4 min-h-screen max-w-[1240px] mx-auto">
       <ExploreType></ExploreType>
-      <ExploreFilters></ExploreFilters>
+      {/* <ExploreFilters></ExploreFilters> */}
+      <ExploreFiltersModal />
+      <div className="hidden md:block">
+        <ExploreFiltersForm />
+        
+      </div>
     {/* <DateRangePickerWithInlineButtons/> */}
       {/* Events */}
       <div className="my-8 ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {mockEvents.map((event) => {
             const cards = [];
             for(let i = 0; i < 5; i++){
@@ -120,6 +130,7 @@ export const ExplorePage = () => {
           </p>
         )}
       </div>
+    </div>
     </div>
   );
 };

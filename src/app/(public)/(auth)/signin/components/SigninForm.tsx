@@ -1,17 +1,15 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { FormInput } from "./FormInput";
 import { UserSigninDto } from "@/types/user/auth/auth.dto";
 import { UserSignin } from "@/app/api/auth/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
-
-
+import { signIn, signOut } from "next-auth/react";
+import { FormInput } from "../../components/FormInput";
 
 export const SigninForm = () => {
   const router = useRouter();
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -22,20 +20,33 @@ export const SigninForm = () => {
 
   const onSubmit = async (data: UserSigninDto) => {
     setError(null);
-    UserSignin(data)
-    .then((ret) => {
-      if(ret?.error){
-        throw new Error(ret.message)
-      }
-      router.push("/feed");
+    await signOut({ redirect: false });
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+      callbackUrl: "/feed",
+    });
+    if (res?.error) {
+      setError(res.error); // ou uma mensagem personalizada
+    } else {
       reset();
-    })
-    .catch((error: any) => {
-      setError(error);
-    })
-    .finally(() => {
-      
-    })
+      router.push("/feed");
+    }
+    // UserSignin(data)
+    // .then((ret) => {
+    //   if(ret?.error){
+    //     throw new Error(ret.message)
+    //   }
+    //   router.push("/feed");
+    // })
+    // .catch((error: any) => {
+    //   setError(error);
+    // })
+    // .finally(() => {
+
+    //   reset();
+    // })
     //  const res = await signIn("credentials", {
     //   redirect: false,
     //   email: data.email,
@@ -52,7 +63,7 @@ export const SigninForm = () => {
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} method="POST">
-        <FormInput
+      <FormInput
         errors={errors}
         register={register}
         inputProps={{
@@ -64,8 +75,8 @@ export const SigninForm = () => {
         validation={{
           required: "This is required.",
         }}
-        />
-        <FormInput
+      />
+      <FormInput
         errors={errors}
         register={register}
         inputProps={{
@@ -77,11 +88,9 @@ export const SigninForm = () => {
         validation={{
           required: "This is required.",
         }}
-        />
+      />
       {error && (
-        <p className="text-red-500">
-          {typeof error === "string" ? error : ''}
-        </p>
+        <p className="text-red-500">{typeof error === "string" ? error : ""}</p>
       )}
       <div>
         <button

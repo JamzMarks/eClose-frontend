@@ -8,7 +8,7 @@ import { blueMark, redMark } from './MapMarks'
 
 const MapLeaf = () => {
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={13} 
+    <MapContainer center={[-23.503, -46.878]} zoom={14} 
         scrollWheelZoom={true} 
         className="rounded-lg shadow-md z-10"
         zoomControl={false}

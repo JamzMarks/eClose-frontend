@@ -1,44 +1,33 @@
-'use client';
 
-import { useSession } from "next-auth/react";
-import ProfileAside from "../components/ProfileAside/ProfileAside";
 import { FeedComponent } from "./components/PostScrool.tsx/FeedComponent";
 import NewsAside from "../components/NewsAside/NewsAside";
-
+import CreatePost from "../components/createPost/CreatePost";
+import TimedPostsSection from "../components/timedPosts/TimedPostsSection";
+import TimedPostsCarousel from "../components/timedPosts/TimedPostsCarousel";
 
 export const FeedPage = () => {
-  // const { data: session, status } = useSession();
-  console.log('renderizou')
   return (
-    <div className="min-h-screen flex flex-col md:flex-row gap-6 mt-6">
-      {/* Sidebar no topo (mobile) e lateral (desktop) */}
-      <ProfileAside />
-      <section className="flex-1">
-        <div>
+    <div className="flex justify-center p-4 w-full">
+      
+      <div className="w-full max-w-[1000px] flex flex-col md:flex-row gap-6">
+        <section className="flex-1 flex flex-col gap-6">
+          <div>
+            <TimedPostsCarousel />
+          </div>
+          <div>
+            <CreatePost />
+          </div>
+          <FeedComponent />
+        </section>
 
-          <h1 className="text-2xl font-bold mb-4">Feed</h1>
-
-          {status === "loading" && <p>Carregando...</p>}
-
-          {/* {session?.user ? (
-            <div className="space-y-2">
-              <p>Bem-vindo, <strong>{session.user.name}</strong></p>
-              <pre className="bg-gray-100 p-2 rounded text-sm">
-                {JSON.stringify(session.user, null, 2)}
-              </pre>
-            </div>
-          ) : (
-            <p>Você precisa estar logado.</p>
-          )} */}
-        </div>
-        <div>
-          
-        </div>
-        <FeedComponent></FeedComponent>
-      </section>
-      <NewsAside></NewsAside>
+        {/* Sidebar */}
+        <aside className="w-full md:w-80 shrink-0">
+          <NewsAside />
+        </aside>
+      </div>
     </div>
   );
 };
+
 
 export default FeedPage;
