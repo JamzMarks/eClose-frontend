@@ -29,7 +29,7 @@ export const AsideNavbar = () => {
             group flex items-center xl:justify-start justify-center gap-2 xl:gap-3
             p-3 rounded-md transition-all duration-200 ease-in-out
             text-gray-700 hover:bg-amber-100 hover:text-amber-700
-            text-xs xl:text-sm font-medium
+            text-xs xl:text-sm font-medium cursor-pointer
           "
         >
           <Icon size={20} className="text-inherit transition-transform duration-200 group-hover:scale-110" />

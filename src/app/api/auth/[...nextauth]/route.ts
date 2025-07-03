@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch(`${process.env.NEST_API_URL}/auth/signin`, {
+        const res = await fetch(`${process.env.API_URL}/auth/signin`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -74,7 +74,7 @@ export const authOptions: NextAuthOptions = {
       }
       if (typeof token.expiresAt === "number" && Date.now() / 1000 > token.expiresAt) {
         try {
-          const res = await fetch(`${process.env.NEST_API_URL}/auth/refresh`, {
+          const res = await fetch(`${process.env.API_URL}/auth/refresh`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ refreshToken: token.refreshToken }),
@@ -129,7 +129,7 @@ export { handler as GET, handler as POST };
 //   Optionally: refresh access token
 //   if (token.expiresAt && Date.now() / 1000 > token.expiresAt) {
 //     try {
-//       const res = await fetch(`${process.env.NEST_API_URL}/auth/refresh`, {
+//       const res = await fetch(`${process.env.API_URL}/auth/refresh`, {
 //         method: 'POST',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify({ refreshToken: token.refreshToken }),

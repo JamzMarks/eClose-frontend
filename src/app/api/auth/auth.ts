@@ -1,6 +1,6 @@
 import { UserSigninDto, UserSignupDto } from "@/types/user/auth/auth.dto";
 
-const api = 'http://localhost:3000'
+const api = 'http://localhost:3000/api'
 
 
 export async function UserSignin(data: UserSigninDto){

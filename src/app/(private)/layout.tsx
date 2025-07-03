@@ -25,7 +25,7 @@ export default async function PrivateLayout({
   console.log("Device Info:", device); // Você pode passar isso por contexto se quiser
 
   return (
-    <div>
+    <div className="">
       {/* Navbar fixa no topo */}
       <header className=" w-full">
         <Navbar />
@@ -37,7 +37,7 @@ export default async function PrivateLayout({
         </aside>
 
         {/* Aqui é onde garantimos que o main NÃO ultrapasse */}
-        <main className=" flex flex-col w-full max-w-full min-w-0 justify-center items-center">
+        <main className=" flex flex-col w-full max-w-full min-w-0 justify-center items-center overflow-y-auto">
           {/* min-w-0 evita que ele cresça além do necessário */}
           <div className="flex-1 w-full max-w-7xl">
             {children}
