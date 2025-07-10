@@ -1,4 +1,5 @@
 import React from 'react';
+import ProfileStats from './ProfileStats';
 
 export const ProfileHeader = () => {
   return (
@@ -27,7 +28,9 @@ export const ProfileHeader = () => {
       {/* Nome + Nav */}
       <div className="px-4">
         <h1 className="text-xl font-semibold">Nome do Usuário</h1>
-
+        <div>
+        <ProfileStats/>
+      </div>
         {/* Nav mockada */}
         <nav className="mt-4 border-b border-gray-200">
           <ul className="flex space-x-6 text-sm text-gray-600">
@@ -38,6 +41,7 @@ export const ProfileHeader = () => {
           </ul>
         </nav>
       </div>
+      
     </div>
   );
 };

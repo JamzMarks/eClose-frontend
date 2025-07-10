@@ -71,7 +71,7 @@ export const SignupForm = () => {
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
 
-      <FormInput
+      {/* <FormInput
           errors={errors}
           register={register}
           inputProps={{
@@ -83,7 +83,7 @@ export const SignupForm = () => {
           validation={{
             required: "This is required.",
           }}
-        />
+        /> */}
       <FormInput
           errors={errors}
           register={register}

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { NextAuthSessionProvider } from "./providers/sessionProvider";
+import { NextAuthSessionProvider } from "@/providers/SessionProvider";
+import { ThemeProvider } from "next-themes";
+import { ApiClientProvider } from "@/context/ApiClientContext";
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,12 +29,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
+        {/* <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&family=Outfit:wght@100..900&display=swap" rel="stylesheet"/> */}
+        {/* <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></link> */}
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
       >
-        <NextAuthSessionProvider>
-          {children}
-        </NextAuthSessionProvider>
+        {/* <ThemeProvider > */}
+          <NextAuthSessionProvider>
+            <ApiClientProvider>
+              {children}
+            </ApiClientProvider>
+          </NextAuthSessionProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

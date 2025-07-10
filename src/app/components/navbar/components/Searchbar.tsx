@@ -22,7 +22,7 @@ export const Searchbar = () => {
           {...register("search")}
           type="text"
           placeholder="Search"
-          className="w-2/3 rounded-full pl-10 pr-4 py-2 border border-neutral-200 
+          className="w-10/12 rounded-full pl-10 pr-4 py-2 border border-bdneutral bg-modal
                      placeholder-neutral-400 focus:outline-none 
                      focus:w-full transition-all duration-200 ease-in-out"
         />

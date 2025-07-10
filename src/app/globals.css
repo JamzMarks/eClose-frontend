@@ -1,26 +1,70 @@
 @import "tailwindcss";
-
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --neutral: #27272733;
+  --modal: #ffffff;
+  --font-sans: 'Outfit', 
+  -apple-system, 
+  BlinkMacSystemFont, 
+    Roboto, 
+    'Helvetica Neue', 
+    Arial, 
+    'Apple Color Emoji', 
+    'Segoe UI Emoji',
+    'Segoe UI Symbol', 
+    sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0e1113; 
+    --foreground: #dbe3e7;
+    --neutral: #FFFFFF33;
+    --modal: #181c1f;
+    
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-bdneutral: var(--neutral);
+  --color-modal: var(--modal);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-primary: #e4720e;
+  --color-secondary: #f90d46;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a; */
-    /* --foreground: #ededed; */
-  }
-}
 body {
-  /* background: var(--background); */
-  /* color: var(--foreground); */
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  
 }
+
+/* styles/globals.css ou um módulo */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #9ca3af; /* Tailwind's gray-400 */
+  border-radius: 9999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280; /* Tailwind's gray-500 */
+}
+
+/* Firefox (opcional) */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af transparent;
+}
+
