@@ -1,102 +1,146 @@
-'use client'
+"use client";
 
-import { ROUTES } from '@/constants/routes'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { HelpCircle, LogOut } from 'lucide-react'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession, signOut } from "next-auth/react";
+import { ROUTES } from "@/constants/routes";
+import { LogOut, HelpCircle, Bell, Settings, Moon, User } from "lucide-react";
+import NavModalSection from "./NavModalSection";
+import ThemeToggle from "./ThemeToggle"; // Suporte para dark mode toggle (componente que você pode criar)
 
 interface NavAuthModalProps {
-  open: boolean
-  setOpen: (value: boolean) => void
-}
-
-interface NavButtonProps {
-  title: string
-  linkTo?: string
-  icon?: React.ElementType
-  onClick?: () => void
-}
-
-const NavButton = ({ title, icon: Icon, linkTo, onClick }: NavButtonProps) => {
-  const content = (
-    <div
-      onClick={onClick}
-      className="w-full text-left hover:bg-gray-100 transition pl-3 py-1 flex items-center gap-2 cursor-pointer"
-    >
-      {Icon && <Icon size={16} className="text-gray-500" />}
-      {title}
-    </div>
-  )
-
-  return linkTo ? (
-    <Link href={linkTo} onClick={onClick}>
-      {content}
-    </Link>
-  ) : (
-    content
-  )
+  open: boolean;
+  setOpen: (value: boolean) => void;
 }
 
 const NavAuthModal = ({ open, setOpen }: NavAuthModalProps) => {
-  const router = useRouter()
-  const { data: session, status } = useSession()
+  const { data: session } = useSession();
+
+  if (!open) return null;
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: ROUTES.HOME })
-    setOpen(false)
-  }
-
-  if (!open) return null
+    signOut({ callbackUrl: ROUTES.HOME });
+    setOpen(false);
+  };
 
   return (
-    <div className="absolute top-full right-0 mt-3 z-50 min-w-52 max-w-56 bg-white rounded-xl shadow-lg border border-gray-200 animate-fade-in py-3">
-      <nav className="flex flex-col space-y-4 text-md text-gray-700">
-        {/* Acesso ou Conta */}
-        {!session?.user ? (
+    // <div className="absolute top-full right-0 mt-2 z-50 min-w-60 max-w-64 bg-white rounded-md shadow-lg border border-gray-200 animate-fade-in py-3 dark:bg-gray-900 dark:border-gray-700">
+    <div
+      className="absolute top-full right-0 mt-2 z-50 min-w-60 max-w-64 
+      bg-modal rounded-md shadow-lg 
+        animate-fade-in py-3 "
+    >
+      <nav className="flex flex-col space-y-4 text-md text-foreground dark:text-foreground">
+        {session?.user ? (
           <>
-            <div>
-              <span className="text-xs uppercase text-gray-400 font-medium px-3">Acesso</span>
-              <ul className="space-y-1">
-                <li>
-                  <NavButton linkTo={ROUTES.AUTH.SIGNIN} title="Entrar" onClick={() => setOpen(false)} />
-                </li>
-                <li>
-                  <NavButton linkTo={ROUTES.AUTH.SIGNUP} title="Cadastrar" onClick={() => setOpen(false)} />
-                </li>
-              </ul>
+            <ProfileSection
+              name={session.user.name}
+              email={session.user.email}
+              image={session.user.image}
+            />
+
+            <NavModalSection
+              title="Perfil"
+              items={[
+                {
+                  title: "Meu Perfil",
+                  icon: User,
+                  linkTo: ROUTES.PROFILE(session.user.id),
+                  onClick: () => setOpen(false),
+                },
+                {
+                  title: "Notificações",
+                  icon: Bell,
+                  linkTo: ROUTES.ACCOUNT.NOTIFICATIONS,
+                  onClick: () => setOpen(false),
+                },
+              ]}
+            />
+
+            <div className="px-3">
+              <div className="flex items-center gap-2 text-sm py-1">
+                <Moon size={16} className="text-gray-500 dark:text-gray-400" />
+                <ThemeToggle />
+              </div>
             </div>
+
+            <NavModalSection
+              title="Conta"
+              items={[
+                {
+                  title: "Configurações",
+                  icon: Settings,
+                  linkTo: ROUTES.ACCOUNT.SETTINGS,
+                  onClick: () => setOpen(false),
+                },
+                { title: "Sair", icon: LogOut, onClick: handleSignOut },
+              ]}
+            />
           </>
         ) : (
           <>
-            <div>
-              <span className="text-xs uppercase text-gray-400 font-medium px-3">Conta</span>
-              <ul className="space-y-1 mt-2">
-                <li>
-                  <NavButton title="Sair" icon={LogOut} onClick={handleSignOut} />
-                </li>
-              </ul>
-            </div>
+            <NavModalSection
+              title="Acesso"
+              items={[
+                {
+                  title: "Entrar",
+                  linkTo: ROUTES.AUTH.SIGNIN,
+                  onClick: () => setOpen(false),
+                },
+                {
+                  title: "Cadastrar",
+                  linkTo: ROUTES.AUTH.SIGNUP,
+                  onClick: () => setOpen(false),
+                },
+              ]}
+            />
+
+            <hr className="border-t border-gray-200 dark:border-gray-700 mx-3" />
+
+            <NavModalSection
+              title="Ajuda"
+              items={[
+                {
+                  title: "Problemas de acesso",
+                  linkTo: ROUTES.HELP,
+                  onClick: () => setOpen(false),
+                },
+                {
+                  title: "Ajuda e suporte",
+                  linkTo: ROUTES.HELP,
+                  icon: HelpCircle,
+                  onClick: () => setOpen(false),
+                },
+              ]}
+            />
           </>
         )}
-
-        <hr className="border-t border-gray-200 mx-3" />
-
-        {/* Ajuda */}
-        <div>
-          <span className="text-xs uppercase text-gray-400 font-medium px-3">Ajuda</span>
-          <ul className="mt-2 space-y-1">
-            <li>
-              <NavButton title="Recuperar senha" linkTo={ROUTES.HELP} onClick={() => setOpen(false)} />
-            </li>
-            <li>
-              <NavButton title="Central de ajuda" linkTo={ROUTES.HELP} icon={HelpCircle} onClick={() => setOpen(false)} />
-            </li>
-          </ul>
-        </div>
       </nav>
     </div>
-  )
-}
+  );
+};
 
-export default NavAuthModal
+export default NavAuthModal;
+
+// Componente local interno
+const ProfileSection = ({
+  name,
+  email,
+  image,
+}: {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+}) => {
+  return (
+    <div className="px-3 pb-3 border-b border-bdneutral">
+      <div className="flex items-center gap-3">
+        {image && (
+          <img src={image} alt="Avatar" className="w-9 h-9 rounded-full" />
+        )}
+        <div className="flex flex-col">
+          {name && <span className="text-sm font-medium truncate">{name}</span>}
+          {email && <span className="text-xs truncate">{email}</span>}
+        </div>
+      </div>
+    </div>
+  );
+};

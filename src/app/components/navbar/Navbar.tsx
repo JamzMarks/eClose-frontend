@@ -6,7 +6,7 @@ import ProfileModalButton from "./components/UserBtn/AuthBtn";
 
 export const Navbar = () => {
   return (
-    <nav className="px-2 xl:px-4 bg-white h-15 border border-gray-100 ">
+    <nav className="px-2 xl:px-4 h-full bg-background dark:bg-background border-b border-bdneutral">
       <div className="h-full flex flex-row items-center justify-between gap-4 max-w-full">
         {/* Left - Logo + Search */}
         <div className="flex items-center space-x-2">

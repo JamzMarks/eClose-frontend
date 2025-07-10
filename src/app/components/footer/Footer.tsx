@@ -6,7 +6,7 @@ export const Footer = () => {
     <footer className="bg-[#121212] text-gray-300">
       <div className="mx-auto w-full max-w-screen-xl px-4 py-6 lg:py-10">
         <UpperFooter />
-        <hr className="my-6 border-gray-400" />
+        <hr className="my-6 border-bdneutral" />
         <BottomFooter />
       </div>
     </footer>

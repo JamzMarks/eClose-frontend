@@ -45,16 +45,18 @@ const mockReels = [
     thumb: "/thumbs/thumb3.jpg",
     description: "Confere isso!",
   },
+
+
 ];
 
 export const TimedPostsCarousel = () => {
   return (
-    <div className="w-full overflow-hidden mb-6">
-      <div className="grid grid-cols-6 gap-4 overflow-x-auto scrollbar-hide">
+    <div className="w-full overflow-hidden mb-6 mt-2">
+      <div className="flex gap-4 overflow-x-auto scrollbar-hide px-4 snap-x snap-mandatory">
         {mockReels.map((reel) => (
           <div
             key={reel.id}
-            className="min-w-[50px] w-[50px] h-[50px] rounded-full overflow-hidden relative bg-black shadow-md flex-shrink-0"
+            className="min-w-[70px] w-[70px] h-[70px] rounded-full overflow-hidden relative bg-black shadow-md flex-shrink-0 snap-start cursor-pointer"
           >
             <video
               src={reel.videoUrl}
@@ -64,10 +66,13 @@ export const TimedPostsCarousel = () => {
               playsInline
               autoPlay
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2 text-white">
-              <p className="text-xs font-semibold">@{reel.user}</p>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-1 py-0.5 text-white">
+              <p className="text-[10px] font-semibold truncate">@{reel.user}</p>
             </div>
-            <Play size={20} className="absolute top-2 right-2 text-white/70" />
+            <Play
+              size={16}
+              className="absolute top-1.5 right-1.5 text-white drop-shadow-md"
+            />
           </div>
         ))}
       </div>

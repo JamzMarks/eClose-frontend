@@ -5,9 +5,13 @@ export const ROUTES = {
     SIGNUP: '/signup',
     LOGOUT: '/logout',
   },
+  ACCOUNT: {
+    SETTINGS: '/settings',
+    NOTIFICATIONS:'/notifications'
+  },
   FEED: '/feed',
   MAP: '/map',
   EXPLORE: '/explore',
   HELP: '/help',
-  PROFILE: (id: string) => `/profile/${id}`,
+  PROFILE: (username: string) => `/profile/${username}`,
 };

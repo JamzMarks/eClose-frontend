@@ -4,6 +4,15 @@ import type { NextAuthOptions } from "next-auth";
 import NextAuth, { DefaultSession, DefaultUser } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 
+
+type UserWithTokens = {
+  id: string;
+  email?: string;
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: number;
+};
+
 declare module "next-auth" {
   interface Session {
     accessToken?: string;
@@ -38,7 +47,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials, req): Promise<UserWithTokens | null> {
         const res = await fetch(`${process.env.API_URL}/auth/signin`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -50,13 +59,12 @@ export const authOptions: NextAuthOptions = {
         const data = await res.json();
 
         if (!res.ok || !data.accessToken) return null;
-        console.log(data)
         return {
-          id: data.user.id ?? 'no-id',
+          id: data.user.id,
           email: data.user.email ?? credentials?.email,
           accessToken: data.accessToken,
           refreshToken: data.refreshToken,
-          expiresIn: data.expiresIn,
+          expiresAt: Math.floor(Date.now() / 1000) + data.expiresIn,
         };
       },
     }),
@@ -102,8 +110,8 @@ export const authOptions: NextAuthOptions = {
   },
 
   pages: {
-    signIn: "signin",
-    newUser: "signup",
+    signIn: "/signin",
+    newUser: "/signup",
     signOut: "/",
   },
 };
@@ -111,47 +119,8 @@ export const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-// async jwt({ token, user }) {
-//     console.log('🔵 [jwt] token atual:', token);
-//   if (user) {
-//     token.accessToken = user.accessToken;
-//     token.refreshToken = user.refreshToken;
-//     token.expiresAt = Math.floor(Date.now() / 1000) + user.expiresIn;
-//   }
-// if (user) {
-//     token.accessToken = user.accessToken;
-//     token.refreshToken = user.refreshToken;
-//     token.expiresAt = Math.floor(Date.now() / 1000) + (user.expiresIn ?? 0);
-//     token.id = user.id;
-//     console.log('🟢 [jwt] novo token:', token);
-//   }
 
-//   Optionally: refresh access token
-//   if (token.expiresAt && Date.now() / 1000 > token.expiresAt) {
-//     try {
-//       const res = await fetch(`${process.env.API_URL}/auth/refresh`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ refreshToken: token.refreshToken }),
-//       });
-//       const refreshed = await res.json();
+  function GoogleProvider(arg0: { clientId: string | undefined; clientSecret: string | undefined; }): import("next-auth/providers/index").Provider {
+    throw new Error("Function not implemented.");
+  }
 
-//       token.accessToken = refreshed.accessToken;
-//       token.expiresAt = Math.floor(Date.now() / 1000) + refreshed.expiresIn;
-//       token.refreshToken = refreshed.refreshToken ?? token.refreshToken;
-//     } catch (error) {
-//       console.error('Token refresh failed:', error);
-//       return { ...token, error: 'RefreshAccessTokenError' };
-//     }
-//   }
-
-//   return token;
-// },
-// async session({ session, token }) {
-//   console.log('🟣 [session] sessão antes:', session);
-//   session.accessToken = token.accessToken;
-//   session.refreshToken = token.refreshToken;
-//   session.user.id = token.id;
-//   console.log('🟢 [session] sessão final:', session);
-//   return session;
-// }
